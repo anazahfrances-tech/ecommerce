@@ -1,4 +1,4 @@
-package com.ecommerce;
+package com.ecommerce.config;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
