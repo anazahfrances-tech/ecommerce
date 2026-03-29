@@ -2,7 +2,7 @@ package com.ecommerce.controller;
 
 import com.ecommerce.model.User;
 import com.ecommerce.service.UserService;
-import com.ecommerce.config.JwtUtil; // we will create this
+import com.ecommerce.config.JwtUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +27,23 @@ public class AuthController {
     public String test() {
         return "Auth working";
     }
+
+    // Register endpoint
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody User user) {
+        try {
+            User created = userService.createUser(user);
+            return ResponseEntity.ok(Map.of(
+                    "message", "User registered successfully",
+                    "userId", created.getId(),
+                    "name", created.getName(),
+                    "email", created.getEmail()
+            ));
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
+    }
+
     // Login endpoint
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
@@ -38,7 +55,6 @@ public class AuthController {
             return ResponseEntity.status(401).body("Invalid email or password");
         }
 
-        // Generate JWT token
         String token = jwtUtil.generateToken(user.getEmail());
         return ResponseEntity.ok(Map.of(
                 "token", token,
