@@ -2,7 +2,7 @@ package com.ecommerce.controller;
 
 import com.ecommerce.model.User;
 import com.ecommerce.service.UserService;
-import com.ecommerce.config.JwtUtil; // we will create this
+import com.ecommerce.JwtUtil; // we will create this
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;

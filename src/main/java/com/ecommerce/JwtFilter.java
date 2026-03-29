@@ -1,4 +1,4 @@
-package com.ecommerce.config;
+package com.ecommerce;
 
 import com.ecommerce.model.User;
 import com.ecommerce.repository.UserRepository;
